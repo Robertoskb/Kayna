@@ -1,0 +1,4 @@
+DISPLAY_NAME=Kayna
+MAIN=bot.py
+MEMORY=128
+VERSION=recommended
