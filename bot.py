@@ -4,15 +4,13 @@ from discord.ext import commands
 from decouple import config
 from django.core import management
 from manage import init_django
-# import json
+
 
 init_django()
 management.call_command('makemigrations')
 management.call_command('migrate')
 
-# with open('data.json', 'r', encoding='utf-8') as data_file:
-#     data = json.load(data_file)
-#     management.call_command('loaddata', 'data.json')
+management.call_command('loaddata', 'data.json')
 
 client = commands.Bot(command_prefix='-', intents=discord.Intents.all(),
                       application_id=1162450467452895282)
