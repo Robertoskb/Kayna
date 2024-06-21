@@ -10,8 +10,6 @@ init_django()
 management.call_command('makemigrations')
 management.call_command('migrate')
 
-management.call_command('loaddata', 'data.json')
-
 client = commands.Bot(command_prefix='-', intents=discord.Intents.all(),
                       application_id=1162450467452895282)
 
@@ -34,7 +32,7 @@ def load():
 
 def main():
     load()
-    client.run(config("TOKEN"))
+    client.run(config("TOKEN1"))
 
 
 main()

@@ -82,17 +82,14 @@ class Breedings(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.slash_command(name='ping', description='ping')
-    async def ping(self, ctx: discord.ApplicationContext):
-        await ctx.respond('pong')
-
-    @commands.slash_command(name='breeding')
-    @discord.option(name='rarety', choices=['Common', 'Rare', 'Epic'])
-    @discord.option(name='language', choices=['Portuguese', 'English', 'Spanish'])  # noqa:E501
+    @commands.slash_command(name='breeding', description='Get the breeding combinations of a monster')  # noqa:E501
+    @discord.option(name='monster', description='The name of the monster')  # noqa:E501
+    @discord.option(name='rarety', choices=['Common', 'Rare', 'Epic'], description='The rarety of the monster')  # noqa:E501
+    @discord.option(name='language', choices=['Portuguese', 'English', 'Spanish'], description='The language you want to see the results')  # noqa:E501
     async def breeding(self, ctx, monster: str, rarety: str, language: str):
         breedings = await get_monster_breedings(name=monster, rarety=rarety)
         if not breedings:
-            return await ctx.respond('Nada encontrado ;-;')
+            return await ctx.respond('Monstro sem combinações ou inexistente', ephemeral=True)
 
         embed = get_embed(breedings, language)
 
